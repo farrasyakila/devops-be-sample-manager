@@ -53,6 +53,7 @@ pipeline {
                     sh '''
                         cd k8s/dev/
                         whoami
+                        whereis kubectl
                         # Replace image tag in deploy.yaml with the current BUILD_NUMBER
                         sed -i "s|farrasyakila/api-go-dev|farrasyakila/api-go-dev:${BUILD_NUMBER}|" deploy.yaml
                     

@@ -28,23 +28,23 @@ pipeline {
             }
         }
     }
-    stage('push') {
-        steps {
-            script {
-             if (env.BRANCH_NAME == 'dev') {
-            sh 'docker push farrasyakila/api-go-dev:$BUILD_NUMBER' 
+        stage('push') {
+            steps {
+                script {
+                if (env.BRANCH_NAME == 'dev') {
+                sh 'docker push farrasyakila/api-go-dev:$BUILD_NUMBER' 
+                    }
+                    else if (env.BRANCH_NAME == 'staging') {
+                sh 'docker push farrasyakila/api-go-stg:$BUILD_NUMBER'
                 }
-                else if (env.BRANCH_NAME == 'staging') {
-            sh 'docker push farrasyakila/api-go-stg:$BUILD_NUMBER'
-               }
-                else if (env.BRANCH_NAME == 'prod') {
-            sh 'docker push farrasyakila/api-go-prod:$BUILD_NUMBER'
-               }
-                else {
-                    sh 'echo Nothing to Push'
+                    else if (env.BRANCH_NAME == 'prod') {
+                sh 'docker push farrasyakila/api-go-prod:$BUILD_NUMBER'
+                }
+                    else {
+                        sh 'echo Nothing to Push'
+                    }
                 }
             }
-          }
         } 
         stage('deploy') {
             steps {
@@ -82,6 +82,7 @@ pipeline {
                     else if (env.BRANCH_NAME == 'prod') {
                     sh '''
                     cd k8s/dev/
+                    whoami
                         # Replace image tag in deploy.yaml with the current BUILD_NUMBER
                         sed -i "s|farrasyakila/api-go-prod|farrasyakila/api-go-prod:${BUILD_NUMBER}|" deploy.yaml
                     
@@ -102,4 +103,3 @@ pipeline {
         }
     }
 }
-//

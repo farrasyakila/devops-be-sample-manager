@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        PATH = "${env.PATH}:/var/lib/jenkins/google-cloud-sdk/bin"
+    }
     stages {
         stage('build') {
             steps {

@@ -67,7 +67,7 @@ pipeline {
                         kubectl apply -f deploy.yaml
                     '''
                 }
-                    else if (env.BRANCH_NAME == 'stg') {
+                    else if (env.BRANCH_NAME == 'staging') {
                     sh '''
                     cd k8s/staging/
                         # Replace image tag in deploy.yaml with the current BUILD_NUMBER
@@ -84,7 +84,7 @@ pipeline {
                     }
                     else if (env.BRANCH_NAME == 'prod') {
                     sh '''
-                    cd k8s/dev/
+                    cd k8s/prod/
                         # Replace image tag in deploy.yaml with the current BUILD_NUMBER
                         sed -i "s|farrasyakila/api-go-prod|farrasyakila/api-go-prod:${BUILD_NUMBER}|" deploy.yaml
                     

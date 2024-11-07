@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name:  api-go
-        image: farrasyakila/dev-api-go
+        image: farrasyakila/api-go-dev
         env:
           - name: APP_NAME
             valueFrom:

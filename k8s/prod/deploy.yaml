@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-go
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-go
+  template:
+    metadata:
+      labels:
+        app: api-go
+    spec:
+      containers:
+      - name:  api-go
+        image: farrasyakila/prod-api-go
+        env:
+          - name: APP_NAME
+            valueFrom:
+              secretKeyRef:
+                key: APP_NAME
+                name: api-go
+          - name: APP_PORT
+            valueFrom:
+              secretKeyRef:
+                key: APP_PORT
+                name: api-go
+          - name: APP_ENV
+            valueFrom:
+              secretKeyRef:
+                key: APP_ENV
+                name: api-go
+          - name: APP_VERSION
+            valueFrom:
+              secretKeyRef:
+                key: APP_VERSION
+                name: api-go
+        resources:
+          limits:
+            cpu: "0.4"
+            memory: 500Mi
+          requests:
+            cpu: "0.1"
+            memory: 150Mi
+        ports:
+        - containerPort: 8080

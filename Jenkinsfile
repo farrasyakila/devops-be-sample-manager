@@ -65,6 +65,7 @@ pipeline {
                         kubectl apply -f secret.yaml
                         kubectl apply -f service.yaml
                         kubectl apply -f deploy.yaml
+                        kubectl apply -f ingress.yaml
                     '''
                 }
                     else if (env.BRANCH_NAME == 'staging') {
@@ -80,6 +81,7 @@ pipeline {
                         kubectl apply -f secret.yaml
                         kubectl apply -f service.yaml
                         kubectl apply -f deploy.yaml
+                        kubectl apply -f ingress.yaml
                     '''
                     }
                     else if (env.BRANCH_NAME == 'prod') {
@@ -95,6 +97,7 @@ pipeline {
                         kubectl apply -f secret.yaml
                         kubectl apply -f service.yaml
                         kubectl apply -f deploy.yaml
+                        kubectl apply -f ingress.yaml
                     '''
                     }
                     else {

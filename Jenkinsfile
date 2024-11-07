@@ -52,6 +52,7 @@ pipeline {
                     if (env.BRANCH_NAME == 'dev') {
                     sh '''
                         cd k8s/dev/
+                        whoami
                         # Replace image tag in deploy.yaml with the current BUILD_NUMBER
                         sed -i "s|farrasyakila/api-go-dev|farrasyakila/api-go-dev:${BUILD_NUMBER}|" deploy.yaml
                     
@@ -82,7 +83,6 @@ pipeline {
                     else if (env.BRANCH_NAME == 'prod') {
                     sh '''
                     cd k8s/dev/
-                    whoami
                         # Replace image tag in deploy.yaml with the current BUILD_NUMBER
                         sed -i "s|farrasyakila/api-go-prod|farrasyakila/api-go-prod:${BUILD_NUMBER}|" deploy.yaml
                     

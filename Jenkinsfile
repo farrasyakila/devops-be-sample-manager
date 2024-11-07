@@ -54,18 +54,17 @@ pipeline {
                 script {
                     if (env.BRANCH_NAME == 'dev') {
                     sh '''
-                        kubectl 
-                        // cd k8s/dev/
-                        // # Replace image tag in deploy.yaml with the current BUILD_NUMBER
-                        // sed -i "s|farrasyakila/api-go-dev|farrasyakila/api-go-dev:${BUILD_NUMBER}|" deploy.yaml
+                        cd k8s/dev/
+                        # Replace image tag in deploy.yaml with the current BUILD_NUMBER
+                        sed -i "s|farrasyakila/api-go-dev|farrasyakila/api-go-dev:${BUILD_NUMBER}|" deploy.yaml
                     
-                        // cat deploy.yaml | grep image:
+                        cat deploy.yaml | grep image:
 
-                        // # Apply Kubernetes configurations
-                        // kubectl apply -f namespace.yaml
-                        // kubectl apply -f secret.yaml
-                        // kubectl apply -f service.yaml
-                        // kubectl apply -f deploy.yaml
+                        # Apply Kubernetes configurations
+                        kubectl apply -f namespace.yaml
+                        kubectl apply -f secret.yaml
+                        kubectl apply -f service.yaml
+                        kubectl apply -f deploy.yaml
                     '''
                 }
                     else if (env.BRANCH_NAME == 'stg') {

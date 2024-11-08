@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress 
+metadata:
+  name: api-go
+  namespace: staging
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: api-stg.farrasyakila.xyz
+    http:
+      paths:
+      - backend:
+          service:
+            name: api-go
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix

@@ -1,0 +1,7 @@
+config:
+  clients:
+    - url: http://loki-loki-distributed-gateway/loki/api/v1/push
+#config:
+#  lokiAddress: ""
+#  clients:
+#    - url: http://loki-gateway/loki/api/v1/push

@@ -13,6 +13,20 @@ spec:
       labels:
         app: api-go
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchLabels:
+                app: api-go
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              topologyKey: topology.kubernetes.io/zone
+              labelSelector:
+                matchLabels:
+                  app: api-go
       containers:
       - name:  api-go
         image: farrasyakila/api-go-prod
@@ -39,8 +53,8 @@ spec:
                 name: api-go
         resources:
           limits:
-            cpu: "0.4"
-            memory: 500Mi
+            cpu: "0.5"
+            memory: 800Mi
           requests:
             cpu: "0.1"
             memory: 150Mi

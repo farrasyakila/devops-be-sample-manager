@@ -1,8 +1,6 @@
 terraform {
-    #versi terraform
     required_version = "~> v1.6.0" 
 
-    #versi provider
     required_providers {
         google = {
             source = "hashicorp/google"
@@ -10,20 +8,17 @@ terraform {
         }
     }
 
-    #simpan state di bucket
     backend "gcs" {
     bucket = "farra"
-    prefix = "learn-with-farra-iam.vpc" #nama direktori di storage nya
+    prefix = "learn-with-farra-iam.vpc" 
     }
 }
 
-#env yg disimpan di local
 locals {
   project = "learn-with-farra"
   region = "asia-southeast2"
 }
 
-#define lokal variable. project dan region sudah fix selalu ada
 provider "google" {
   project = local.project
   region = local.region
@@ -48,17 +43,6 @@ provider "google" {
 #   project = "learn-with-farra"
 #   role    = each.value
 #   member  = "serviceAccount:${data.terraform_remote_state.sa_farra.outputs.email_farra_sa}" #mengambil data dari terraform state dan output di tempat lain (sa)
-# }
-
-# resource "google_project_iam_member" "taufik-iam" {
-#   for_each = toset([
-#     "roles/owner",
-#     "roles/editor",
-#   ])
-
-#   project = local.project
-#   role    = each.value
-#   member  = "user:mtaufiknelas@gmail.com"
 # }
 
 resource "google_project_iam_member" "iam1" {

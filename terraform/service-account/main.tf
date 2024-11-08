@@ -1,29 +1,23 @@
 terraform {
-    #versi terraform
     required_version = "~> v1.6.0" 
 
-    #versi provider
     required_providers {
         google = {
             source = "hashicorp/google"
             version = "6.8.0"
         }
     }
-
-    #simpan state di bucket
     backend "gcs" {
     bucket = "farra"
-    prefix = "learn-with-farra-0.vpc" #nama direktori di storage nya
+    prefix = "learn-with-farra-0.vpc" 
     }
 }
 
-#env yg disimpan di local
 locals {
   project = "learn-with-farra"
   region = "asia-southeast2"
 }
 
-#define lokal variable. project dan region sudah fix selalu ada
 provider "google" {
   project = local.project
   region = local.region

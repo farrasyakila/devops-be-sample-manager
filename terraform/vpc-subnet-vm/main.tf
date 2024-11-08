@@ -1,29 +1,23 @@
 terraform {
-    #versi terraform
     required_version = "~> v1.6.0" 
 
-    #versi provider
     required_providers {
         google = {
             source = "hashicorp/google"
             version = "6.8.0"
         }
     }
-
-  #simpan state di bucket
     backend "gcs" {
     bucket = "farra"
-    prefix = "learn-with-farra.vpc-farra" #nama direktori di storage nya
+    prefix = "learn-with-farra.vpc-farra" 
     }
 }
 
-#env yg disimpen di local
 locals {
   project = "learn-with-farra"
   region = "asia-southeast2"
 }
 
-#define lokal variable. project dan region sudah fixx
 provider "google" {
   project = local.project
   region = local.region
@@ -88,28 +82,3 @@ resource "google_compute_instance" "farraa-vm" {
         scopes = ["cloud-platform"]
   }
 }
-
-
-# #vm test
-# resource "google_compute_instance" "test-vm" {
-#     name         = "test-vm"
-#     machine_type = "e2-micro"
-#     zone         = "asia-southeast2-b"
-#     boot_disk {
-#     auto_delete = true
-#     mode        = "READ_WRITE"
-#     initialize_params {
-#         image = "ubuntu-os-cloud/ubuntu-minimal-2204-jammy-v20230907"
-#         size  = 10
-#         type  = "pd-balanced"
-#    }
-#  }
-#     network_interface {
-#         network    = "vpc-farra"
-#         subnetwork = "farra-subnet"
-#         access_config {}
-#  }
-#     metadata = {
-#         ssh-keys = "farra:${file("farra.pub")}"
-#     }
-# }

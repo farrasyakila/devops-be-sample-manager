@@ -1,5 +1,8 @@
 # How to deploy manifest
 
+### add repo helm
+`helm repo add stable https://prometheus-community.github.io/helm-charts`
+`helm repo add stable https://charts.helm.sh/stable`
 
 ### Monitoring metrics menggunakan prometheus dan grafana dashboard
 

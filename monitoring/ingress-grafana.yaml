@@ -4,9 +4,9 @@ metadata:
   name: ingres-grafana
   namespace: monitoring
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  ingressClassName: nginx
   rules:
   - host: grafana.farrasyakila.xyz
     http:
